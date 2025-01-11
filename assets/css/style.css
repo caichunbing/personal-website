@@ -482,6 +482,30 @@ main {
   transition: color var(--transition-1);
 }
 
+.back-button {
+  
+  font-size: var(--fs-8);
+  padding: 20px 7px;
+  transition: color var(--transition-1);
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #14181b;
+  color: var(--light-gray);
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #45484b;
+}
+
 .navbar-link:hover,
 .navbar-link:focus { color: var(--light-gray-70); }
 
