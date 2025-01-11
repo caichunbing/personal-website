@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Box with Babylon.js and Local GLTF</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <!-- 引入 Babylon.js 和 GLTFLoader 插件 -->
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script> <!-- 添加这个插件 -->
+
+  <script>
+    // 创建引擎和场景
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    const engine = new BABYLON.Engine(canvas, true);
+    const scene = new BABYLON.Scene(engine);
+
+    // 创建相机
+    const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2, 5, BABYLON.Vector3.Zero(), scene);
+    camera.attachControl(canvas, true);
+
+    // 创建灯光
+    const light = new BABYLON.HemisphericLight("light1", BABYLON.Vector3.Up(), scene);
+
+    // 创建绿色立方体
+    const box = BABYLON.MeshBuilder.CreateBox("box", { size: 2 }, scene);
+    const material = new BABYLON.StandardMaterial("green", scene);
+    material.diffuseColor = new BABYLON.Color3(0, 1, 0); // 设置为绿色
+    box.material = material;
+
+    // 直接传入 GLTF 文件的路径变量
+    const gltfPath = './assets/_Id{1112027383272}_Name{11号楼}.gltf';  // 请将此路径替换为你本地文件的路径
+
+    // 加载 GLTF 模型
+    BABYLON.SceneLoader.ImportMesh("", "", gltfPath, scene, function (meshes) {
+      // 将模型放置在立方体上方
+      meshes.forEach(mesh => {
+        mesh.position.y = 1;
+      });
+    });
+
+    // 渲染循环
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', () => {
+      engine.resize();
+    });
+
+    // 全屏显示
+    window.addEventListener('load', () => {
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      engine.resize(); // 调整引擎尺寸以适应窗口
+    });
+  </script>
+</body>
+</html>

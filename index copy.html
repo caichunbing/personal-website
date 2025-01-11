@@ -613,20 +613,21 @@
 
           <ul class="project-list">
 
-            <li class="project-item active" data-filter-item data-category="程序化建模">
+            <li class="project-item  active" data-filter-item data-category="程序化建模">
               <a href="#">
+
                 <figure class="project-img">
-                  <!-- <div class="project-item-icon-box">
+                  <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
-                  </div> -->
-                  
-                  <!-- 创建一个canvas元素，用来显示GLTF模型 -->
-                  <canvas id="gltfCanvas" style="width: 100%; height: 300px;"></canvas>
-            
+                  </div>
+
+                  <img src="./assets/images/portfolio/0.gif" alt="fundo" loading="lazy">
                 </figure>
-            
+
                 <h3 class="project-title">日照建模仿真计算</h3>
+
                 <p class="project-category">程序化建模</p>
+
               </a>
             </li>
 
@@ -814,72 +815,6 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
-<!-- 引入Babylon.js库 -->
-<script src="https://cdn.babylonjs.com/babylon.js"></script>
-<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-
-<script>
-  // 在页面加载时创建Babylon.js引擎和场景
-  window.addEventListener('load', () => {
-    // 获取canvas元素
-    const canvas = document.getElementById("gltfCanvas");
-    
-    // 创建Babylon.js引擎和场景
-    const engine = new BABYLON.Engine(canvas, true);
-    const scene = new BABYLON.Scene(engine);
-
-    // 创建相机
-    const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2, 5, BABYLON.Vector3.Zero(), scene);
-    
-    // 将相机附加到canvas，启用鼠标控制（旋转、缩放）
-    camera.attachControl(canvas, true);
-
-    // 创建光源
-    const light = new BABYLON.HemisphericLight("light1", BABYLON.Vector3.Up(), scene);
-
-    // 创建绿色立方体
-    const box = BABYLON.MeshBuilder.CreateBox("greenBox", { size: 2 }, scene);
-    const greenMaterial = new BABYLON.StandardMaterial("green", scene);
-    greenMaterial.diffuseColor = new BABYLON.Color3(0, 1, 0); // 设置为绿色
-    box.material = greenMaterial;
-
-    // 设置立方体的位置（可选）
-    box.position.y = 1;
-
-    // GLTF文件路径
-    const gltfPath = './assets/models/your-model.gltf';  // 请替换为您的GLTF文件路径
-
-    // 加载GLTF模型
-    BABYLON.SceneLoader.ImportMesh("", "", gltfPath, scene, function (meshes) {
-      // 在模型加载完成后设置它的位置
-      meshes.forEach(mesh => {
-        mesh.position.y = 0;
-      });
-    });
-
-    // 渲染循环
-    engine.runRenderLoop(() => {
-      scene.render();
-    });
-
-    // 监听窗口大小变化
-    window.addEventListener('resize', () => {
-      engine.resize();
-    });
-
-    // 监听canvas的聚焦，确保鼠标事件在canvas上
-    canvas.addEventListener('mouseenter', () => {
-      canvas.style.cursor = 'grab'; // 鼠标悬停时改变为抓取手形状
-    });
-
-    canvas.addEventListener('mouseleave', () => {
-      canvas.style.cursor = 'pointer'; // 离开时恢复为默认指针样式
-    });
-  });
-</script>
-
 
 </body>
 
