@@ -136,24 +136,33 @@ for (let i = 0; i < formInputs.length; i++) {
 
 
 
-// page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// 为每个导航链接添加点击事件
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
+    console.log("Clicked navigation link:", this.innerHTML.toLowerCase());
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
+    for (let j = 0; j < pages.length; j++) {
+      console.log("Checking page:", pages[j].dataset.page);
+
+      if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
+        console.log("Matched page:", pages[j].dataset.page);
+
+        // 添加 active 类
+        pages[j].classList.add("active");
+        navigationLinks[j].classList.add("active");
+
+        // 滚动到顶部
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        console.log("Unmatched page:", pages[j].dataset.page);
+
+        // 移除 active 类
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
       }
     }
-
   });
 }
